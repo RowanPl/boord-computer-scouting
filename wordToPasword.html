@@ -51,13 +51,14 @@
 
         /* Floating binary numbers */
         @keyframes float {
-            0% { transform: translateY(0); opacity: 0; }
+            0% { transform: translateY(100vh); opacity: 0; }
             50% { opacity: 0.5; }
             100% { transform: translateY(-100vh); opacity: 0; }
         }
 
         .binary {
             position: absolute;
+            bottom: -20px;
             color: rgba(0, 255, 204, 0.2);
             z-index: -1;
             animation: float 10s linear infinite;
@@ -127,7 +128,7 @@
 <!-- Container for binary numbers -->
 <script>
     // Create floating binary numbers
-    for (let i = 0; i < 20; i++) {
+    for (let i = 0; i < 80; i++) {
         const binary = document.createElement('div');
         binary.className = 'binary';
         binary.style.left = Math.random() * 100 + '%';
