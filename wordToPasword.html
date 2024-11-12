@@ -3,10 +3,139 @@
 <head>
     <meta charset="UTF-8">
     <title>Boord-Computer</title>
-    <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #0d0d0d;
+            color: #00ffcc;
+            font-family: 'Orbitron', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        /* Grid background */
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background:
+                    linear-gradient(90deg, rgba(0,255,204,0.1) 1px, transparent 1px),
+                    linear-gradient(rgba(0,255,204,0.1) 1px, transparent 1px);
+            background-size: 30px 30px;
+            z-index: -2;
+        }
+
+        /* Scanning line animation */
+        @keyframes scan {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(100vh); }
+        }
+
+        .scan-line {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: rgba(0, 255, 204, 0.5);
+            animation: scan 3s linear infinite;
+            z-index: -1;
+        }
+
+        /* Floating binary numbers */
+        @keyframes float {
+            0% { transform: translateY(0); opacity: 0; }
+            50% { opacity: 0.5; }
+            100% { transform: translateY(-100vh); opacity: 0; }
+        }
+
+        .binary {
+            position: absolute;
+            color: rgba(0, 255, 204, 0.2);
+            z-index: -1;
+            animation: float 10s linear infinite;
+            font-size: 14px;
+        }
+
+        .container {
+            background: rgba(13, 13, 13, 0.8);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 255, 204, 0.2);
+            backdrop-filter: blur(5px);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        h1 {
+            text-shadow: 0 0 10px rgba(0, 255, 204, 0.5);
+            margin-bottom: 1rem;
+        }
+
+        input[type="password"] {
+            background-color: #1a1a1a;
+            border: 2px solid #00ffcc;
+            color: #00ffcc;
+            padding: 10px;
+            font-size: 1.2em;
+            border-radius: 5px;
+            margin-right: 10px;
+            outline: none;
+            transition: box-shadow 0.3s ease;
+        }
+
+        input[type="password"]:focus {
+            box-shadow: 0 0 15px rgba(0, 255, 204, 0.3);
+        }
+
+        button {
+            background-color: #00ffcc;
+            border: none;
+            color: #0d0d0d;
+            padding: 10px 20px;
+            font-size: 1.2em;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        button:hover {
+            background-color: #00e6b8;
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(0, 255, 204, 0.5);
+        }
+
+        p {
+            margin-top: 20px;
+            font-size: 1.5em;
+        }
+    </style>
 </head>
 <body>
+<!-- Scanning line -->
+<div class="scan-line"></div>
+
+<!-- Container for binary numbers -->
+<script>
+    // Create floating binary numbers
+    for (let i = 0; i < 20; i++) {
+        const binary = document.createElement('div');
+        binary.className = 'binary';
+        binary.style.left = Math.random() * 100 + '%';
+        binary.style.animationDelay = Math.random() * 10 + 's';
+        binary.textContent = Math.random().toString(2).substr(2, 8);
+        document.body.appendChild(binary);
+    }
+</script>
 
 <div class="container">
     <h1>Boord Computer</h1>
