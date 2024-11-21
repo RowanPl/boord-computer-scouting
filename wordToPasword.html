@@ -147,17 +147,18 @@
 
 <script>
     document.getElementById('submit').addEventListener('click', function() {
-        const enteredPassword = document.getElementById('password').value;
+        const enteredPassword = document.getElementById('password').value.toLowerCase(); // Convert input to lowercase
         fetch('password.json')
             .then(response => response.json())
             .then(data => {
                 const passwords = data.passwords;
-                const match = passwords.find(p => p.password === enteredPassword);
-                const result = match ? `${match.message}` : 'Onjuist wachtwoord';
+                const match = passwords.find(p => p.password.toLowerCase() === enteredPassword); // Compare case-insensitively
+                const result = match ? `Open envelop : ${match.message}` : 'Onjuist wachtwoord';
                 document.getElementById('result').innerText = result;
             })
             .catch(error => console.error('Error fetching the JSON:', error));
     });
 </script>
+
 </body>
 </html>
